@@ -1,8 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
 import pymysql
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-
 
 def get_db():
     """Return a direct PyMySQL connection to the production database."""
@@ -15,4 +14,3 @@ def get_db():
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=False,
     )
-
