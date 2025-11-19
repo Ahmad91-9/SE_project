@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Financial Reporting{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header>
+        <p class="text-sm text-gray-500">Revenue & Expense</p>
+        <h1 class="text-3xl font-bold text-gray-900">Financial Reporting</h1>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <article class="card text-green-700 bg-green-50 border-none">
+            <p class="text-sm uppercase tracking-[0.3em] text-green-500">Total Income</p>
+            <p class="text-4xl font-bold mt-2">PKR {{ "{:,.0f}".format(total_revenue) }}</p>
+        </article>
+        <article class="card text-red-700 bg-red-50 border-none">
+            <p class="text-sm uppercase tracking-[0.3em] text-red-500">Total Expenses</p>
+            <p class="text-4xl font-bold mt-2">PKR 1.2M</p>
+        </article>
+    </div>
+
+    <div class="card">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold">Revenue Drivers</h2>
+            <p class="text-sm text-gray-500">{{ total_registrations }} student registrations</p>
+        </div>
+        <div class="h-64 bg-gradient-to-br from-pastel-pink/10 to-pastel-blue/10 rounded-2xl"></div>
+    </div>
+</section>
+{% endblock %}
+

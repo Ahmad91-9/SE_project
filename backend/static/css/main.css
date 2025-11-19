@@ -1,0 +1,116 @@
+:root {
+    color-scheme: light;
+}
+
+body {
+    font-feature-settings: "ss01", "cv02";
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-white,
+.btn-outline-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #8b5cf6;
+    color: #fff;
+    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    border: 1.5px solid rgba(139, 92, 246, 0.4);
+    color: #8b5cf6;
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    background: rgba(139, 92, 246, 0.07);
+}
+
+.btn-white {
+    background: #fff;
+    color: #8b5cf6;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08);
+}
+
+.btn-outline-white {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    background: transparent;
+}
+
+.btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #f2f2f8;
+    border-radius: 1.75rem;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 0.35rem;
+}
+
+.form-input {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 0.9rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 1.25rem;
+    border-radius: 0.9rem;
+    color: #6b7280;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.nav-link.active {
+    background: #8b5cf6;
+    color: #fff;
+    box-shadow: 0 15px 25px rgba(139, 92, 246, 0.35);
+}
+

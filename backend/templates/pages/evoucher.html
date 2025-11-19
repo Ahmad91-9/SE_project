@@ -1,0 +1,53 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}E-Voucher Control{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header>
+        <p class="text-sm text-gray-500">Digital Admissions</p>
+        <h1 class="text-3xl font-bold text-gray-900">E-Voucher Generation & Tracking</h1>
+    </header>
+
+    <div class="card">
+        <div class="flex flex-wrap gap-6 items-center">
+            <div class="flex-1">
+                <p class="text-sm text-gray-500 mb-2">Create QR-based passes for any event</p>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="form-label">Event</label>
+                        <select class="form-input">
+                            <option value="">Select event</option>
+                            <option>UOS Annual Tech Summit</option>
+                            <option>Arts & Culture Day</option>
+                            <option>Cricket Tournament</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Voucher Type</label>
+                        <select class="form-input">
+                            <option>General Admission</option>
+                            <option>VIP</option>
+                            <option>Vendor</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Valid From</label>
+                        <input type="date" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Valid Until</label>
+                        <input type="date" class="form-input">
+                    </div>
+                </div>
+                <button class="btn-primary mt-6">Generate Voucher</button>
+            </div>
+            <div class="bg-gray-50 border border-dashed border-gray-200 rounded-2xl p-10 text-center flex flex-col items-center justify-center min-w-[260px]">
+                <i data-lucide="qrcode" class="w-16 h-16 text-pastel-purple mb-4"></i>
+                <p class="text-sm text-gray-500">QR code preview</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

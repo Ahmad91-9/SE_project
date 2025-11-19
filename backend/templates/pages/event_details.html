@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Event · {{ event.title }}{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <p class="text-sm text-gray-500">Event Details</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ event.title }}</h1>
+            <p class="text-sm text-gray-500">{{ event.location }} · {{ event.start_date.strftime('%b %d, %Y') }}</p>
+        </div>
+        <span class="px-4 py-2 rounded-full text-sm font-semibold bg-pastel-purple/10 text-pastel-purple capitalize">{{ event.status }}</span>
+    </header>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+        <article class="card lg:col-span-2 space-y-4">
+            <h2 class="text-xl font-semibold">Overview</h2>
+            <p class="text-gray-600">Detailed analytics, student lists, budget tracking, and real-time status for the selected event. Integrate with registration pipeline, vendor bookings, and financial ledgers.</p>
+            <div class="bg-pastel-purple/10 rounded-2xl p-4">
+                <p class="font-semibold text-pastel-purple">Status: {{ 'Live (3 days remaining)' if event.status == 'active' else event.status | title }}</p>
+            </div>
+        </article>
+        <article class="card space-y-3">
+            <h3 class="text-lg font-semibold">Key Metrics</h3>
+            <p class="flex items-center justify-between text-sm text-gray-600"><span>Capacity</span><span class="font-semibold text-gray-900">{{ event.capacity }}</span></p>
+            <p class="flex items-center justify-between text-sm text-gray-600"><span>Registrations</span><span class="font-semibold text-gray-900">{{ event.registrations|length }}</span></p>
+            <p class="flex items-center justify-between text-sm text-gray-600"><span>Revenue</span><span class="font-semibold text-gray-900">PKR {{ "{:,.0f}".format(event.revenue) }}</span></p>
+        </article>
+    </div>
+</section>
+{% endblock %}
+

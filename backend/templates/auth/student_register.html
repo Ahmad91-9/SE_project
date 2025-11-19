@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Student Signup{% endblock %}
+
+{% block content %}
+<section class="w-full flex items-center justify-center py-16 px-6">
+    <div class="max-w-2xl w-full card">
+        <p class="text-sm text-gray-500 mb-2">Student Access</p>
+        <h1 class="text-3xl font-bold text-gray-900">Create your Ventixe account</h1>
+        <form method="POST" class="mt-6 space-y-4">
+            <div>
+                <label class="form-label">Full Name</label>
+                <input name="full_name" class="form-input" placeholder="Ahmed Khan" required>
+            </div>
+            <div>
+                <label class="form-label">UOS Email</label>
+                <input type="email" name="email" class="form-input" placeholder="student@uos.edu.pk" required>
+            </div>
+            <div>
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-input" placeholder="Choose a secure password" required>
+            </div>
+            <button class="btn-primary w-full">Sign up</button>
+        </form>
+        <p class="text-sm text-gray-500 mt-6 text-center">Already registered? <a href="{{ url_for('auth.login') }}" class="text-pastel-purple font-semibold">Return to login</a></p>
+    </div>
+</section>
+{% endblock %}
+

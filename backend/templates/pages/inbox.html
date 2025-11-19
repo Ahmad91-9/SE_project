@@ -1,0 +1,65 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Unified Inbox{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <p class="text-sm text-gray-500">Students · Vendors · Staff</p>
+            <h1 class="text-3xl font-bold text-gray-900">Unified Inbox</h1>
+        </div>
+        <button class="btn-secondary">Compose</button>
+    </header>
+
+    <div class="card">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-400">New</p>
+                <p class="text-3xl font-bold text-gray-900">12</p>
+                <p class="text-sm text-gray-500">messages today</p>
+            </div>
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-400">Open Tickets</p>
+                <p class="text-3xl font-bold text-gray-900">4</p>
+                <p class="text-sm text-gray-500">awaiting action</p>
+            </div>
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-400">SLAs</p>
+                <p class="text-3xl font-bold text-gray-900">98%</p>
+                <p class="text-sm text-gray-500">same-day responses</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="text-left text-xs uppercase tracking-wide text-gray-500">
+                        <th class="pb-3 pr-6">From</th>
+                        <th class="pb-3 pr-6">Subject</th>
+                        <th class="pb-3 pr-6">Event</th>
+                        <th class="pb-3 pr-6">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr>
+                        <td class="py-3 pr-6 font-semibold text-gray-800">Sara Batool</td>
+                        <td class="py-3 pr-6 text-gray-500">Volunteer shift change</td>
+                        <td class="py-3 pr-6 text-gray-500">Arts & Culture Day</td>
+                        <td class="py-3 pr-6"><span class="px-3 py-1 rounded-full text-xs bg-pastel-purple/10 text-pastel-purple font-semibold">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 pr-6 font-semibold text-gray-800">Vendor · HKB Foods</td>
+                        <td class="py-3 pr-6 text-gray-500">Invoice confirmation</td>
+                        <td class="py-3 pr-6 text-gray-500">Career Expo</td>
+                        <td class="py-3 pr-6"><span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-600 font-semibold">Resolved</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

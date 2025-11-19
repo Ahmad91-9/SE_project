@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Location · {{ event.location }}{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header>
+        <p class="text-sm text-gray-500">Venue Intelligence</p>
+        <h1 class="text-3xl font-bold text-gray-900">Location Details · {{ event.location }}</h1>
+    </header>
+
+    <div class="card">
+        <p class="text-gray-600">Venue management, capacity limits, floor plans, and maintenance schedules. Monitor occupancy and conflicts before confirming bookings.</p>
+        <div class="grid md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-pastel-blue/10 rounded-2xl p-4">
+                <p class="text-xs uppercase tracking-[0.3em] text-pastel-blue">Capacity</p>
+                <p class="text-3xl font-bold text-gray-900">{{ event.capacity }}</p>
+            </div>
+            <div class="bg-pastel-purple/10 rounded-2xl p-4">
+                <p class="text-xs uppercase tracking-[0.3em] text-pastel-purple">Events Scheduled</p>
+                <p class="text-3xl font-bold text-gray-900">4 this month</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

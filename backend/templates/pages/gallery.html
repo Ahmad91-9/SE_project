@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Event Gallery{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header>
+        <p class="text-sm text-gray-500">Media Library</p>
+        <h1 class="text-3xl font-bold text-gray-900">Event Gallery & Assets</h1>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for event in events %}
+        <figure class="relative group rounded-3xl overflow-hidden shadow-lg">
+            <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/{{ '8b5cf6' if loop.index % 3 == 0 else 'f472b6' if loop.index % 3 == 1 else '60a5fa' }}/ffffff?text={{ event.title | urlencode }}" alt="{{ event.title }}">
+            <figcaption class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-center px-4">
+                <div>
+                    <p class="font-semibold">{{ event.title }}</p>
+                    <p class="text-xs text-white/80">{{ event.location }}</p>
+                </div>
+            </figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

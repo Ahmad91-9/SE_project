@@ -1,0 +1,136 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Unified Dashboard{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-10">
+    <header class="flex flex-wrap gap-4 items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500">Unified Event Intelligence</p>
+            <h1 class="text-3xl font-black text-gray-900">Command Center</h1>
+        </div>
+        <div class="flex gap-3">
+            <a href="{{ url_for('pages.calendar') }}" class="btn-secondary">View Calendar</a>
+            <a href="{{ url_for('pages.student_registrations') }}" class="btn-primary">Manage Registrations</a>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <article class="card">
+            <p class="text-sm text-gray-500">Total Events</p>
+            <p class="text-4xl font-extrabold mt-2">{{ stats.total_events }}</p>
+            <span class="text-xs text-green-500 font-semibold">+12% YoY</span>
+        </article>
+        <article class="card">
+            <p class="text-sm text-gray-500">Total Registrations</p>
+            <p class="text-4xl font-extrabold mt-2">{{ stats.total_registrations }}</p>
+            <span class="text-xs text-green-500 font-semibold">+8.5% MoM</span>
+        </article>
+        <article class="card">
+            <p class="text-sm text-gray-500">Active Events</p>
+            <p class="text-4xl font-extrabold mt-2">{{ stats.active_events }}</p>
+            <span class="text-xs text-pastel-blue font-semibold">Live this month</span>
+        </article>
+        <article class="card">
+            <p class="text-sm text-gray-500">Pending Approvals</p>
+            <p class="text-4xl font-extrabold mt-2">{{ stats.pending_registrations }}</p>
+            <span class="text-xs text-yellow-500 font-semibold">Action required</span>
+        </article>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <section class="card lg:col-span-2">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold">Revenue & Registration Trend</h2>
+                <button class="text-sm text-pastel-purple font-semibold">Download snapshot</button>
+            </div>
+            <div class="h-64 bg-gradient-to-br from-pastel-purple/10 via-white to-pastel-blue/10 rounded-2xl flex items-end justify-between p-6">
+                {% for i in range(6) %}
+                <span class="flex flex-col items-center gap-2 w-full">
+                    <div class="w-10 rounded-t-2xl bg-pastel-purple/70 shadow-lg" style="height: {{ 30 + loop.index * 10 }}%;"></div>
+                    <p class="text-xs text-gray-400">{{ ['Jan','Feb','Mar','Apr','May','Jun'][loop.index0] }}</p>
+                </span>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="card">
+            <h2 class="text-xl font-semibold mb-4">Top Event Categories</h2>
+            <ul class="space-y-4">
+                <li class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pastel-purple"></span> Workshops & Seminars</span>
+                    <span class="font-semibold text-gray-800">35%</span>
+                </li>
+                <li class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pastel-pink"></span> Sports & Gaming</span>
+                    <span class="font-semibold text-gray-800">28%</span>
+                </li>
+                <li class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pastel-blue"></span> Cultural Festivals</span>
+                    <span class="font-semibold text-gray-800">20%</span>
+                </li>
+                <li class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-yellow-400"></span> Career Fairs</span>
+                    <span class="font-semibold text-gray-800">17%</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <section class="card">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h2 class="text-xl font-semibold">Upcoming UOS Events</h2>
+                <p class="text-sm text-gray-500">Tap to open detail view</p>
+            </div>
+            <a href="{{ url_for('pages.events_list') }}" class="text-pastel-purple font-semibold text-sm">Open list view</a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="text-left text-xs uppercase tracking-wide text-gray-500">
+                        <th class="pb-3 pr-6">Event</th>
+                        <th class="pb-3 pr-6">Date</th>
+                        <th class="pb-3 pr-6">Location</th>
+                        <th class="pb-3 pr-6">Capacity</th>
+                        <th class="pb-3 pr-6">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for event in events %}
+                    <tr class="hover:bg-gray-50 cursor-pointer" onclick="window.location='{{ url_for('pages.event_details', event_id=event.id) }}'">
+                        <td class="py-4 pr-6 font-semibold text-gray-900">{{ event.title }}</td>
+                        <td class="py-4 pr-6 text-gray-500">{{ event.start_date.strftime('%b %d, %Y') }}</td>
+                        <td class="py-4 pr-6 text-gray-500">{{ event.location }}</td>
+                        <td class="py-4 pr-6 text-gray-500">{{ event.capacity }}</td>
+                        <td class="py-4 pr-6">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold capitalize {{ 'bg-pastel-blue/10 text-pastel-blue' if event.status == 'active' else 'bg-yellow-100 text-yellow-700' }}">{{ event.status }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold">Latest Registrations</h2>
+            <span class="text-sm text-gray-500">{{ latest_registrations|length }} new today</span>
+        </div>
+        <div class="space-y-4">
+            {% for reg in latest_registrations %}
+            <article class="flex items-center justify-between">
+                <div>
+                    <p class="font-semibold text-gray-900">{{ reg.student_name }}</p>
+                    <p class="text-xs text-gray-500">{{ reg.student_id }} · {{ reg.event.title }}</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold capitalize {{ 'bg-green-100 text-green-700' if reg.status == 'approved' else 'bg-yellow-100 text-yellow-700' }}">{{ reg.status }}</span>
+            </article>
+            {% else %}
+            <p class="text-gray-500 text-sm">No registrations yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+</section>
+{% endblock %}
+

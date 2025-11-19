@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Events · Grid{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header class="flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500">Gallery Overview</p>
+            <h1 class="text-3xl font-bold text-gray-900">Events Grid View</h1>
+        </div>
+        <a href="{{ url_for('pages.events_list') }}" class="btn-secondary">Switch to List</a>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for event in events %}
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative">
+            <img class="w-full h-40 object-cover" src="https://placehold.co/600x400/8b5cf6/ffffff?text={{ event.title | urlencode }}" alt="{{ event.title }}">
+            <div class="p-5 space-y-2">
+                <p class="text-lg font-semibold text-gray-900">{{ event.title }}</p>
+                <p class="text-sm text-gray-500">{{ event.location }} · {{ event.start_date.strftime('%b %d, %Y') }}</p>
+                <div class="flex items-center justify-between">
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-pastel-blue/10 text-pastel-blue capitalize">{{ event.status }}</span>
+                    <a href="{{ url_for('pages.event_details', event_id=event.id) }}" class="text-sm font-semibold text-pastel-purple">Open</a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

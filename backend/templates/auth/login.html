@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Ventixe · Secure Login{% endblock %}
+
+{% block content %}
+<section class="w-full flex items-center justify-center py-16 px-6">
+    <div class="max-w-4xl w-full grid lg:grid-cols-2 gap-8">
+        <div class="card">
+            <p class="text-sm text-gray-500 mb-2">Workspace Access</p>
+            <h1 class="text-3xl font-bold text-gray-900">Sign in to Ventixe</h1>
+            <p class="text-sm text-gray-500 mt-2">Choose your role to open the corresponding dashboard.</p>
+            <form method="POST" class="mt-6 space-y-4">
+                <input type="hidden" name="next" value="{{ next }}">
+                <div>
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-input" placeholder="you@uos.edu.pk" required>
+                </div>
+                <div>
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <div>
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-input" required>
+                        <option value="">Select workspace</option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Manager</option>
+                        <option value="organizer">Organizer</option>
+                        <option value="staff">Staff</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                <button class="btn-primary w-full">Sign in</button>
+            </form>
+            <p class="text-sm text-gray-500 mt-6 text-center">Need an account? <a href="{{ url_for('auth.student_register') }}" class="text-pastel-purple font-semibold">Student signup</a></p>
+        </div>
+        <div class="card bg-gradient-to-br from-pastel-purple to-pastel-pink text-white border-none">
+            <p class="text-sm uppercase tracking-[0.5em] text-white/70 mb-4">System Roles</p>
+            <ul class="space-y-4 text-sm">
+                <li><span class="font-semibold">Admins</span> orchestrate finances, bookings, and security.</li>
+                <li><span class="font-semibold">Managers</span> run calendars, invoicing, and approvals.</li>
+                <li><span class="font-semibold">Organizers</span> handle event logistics and vouchers.</li>
+                <li><span class="font-semibold">Staff</span> responds to inbox items and supports check-ins.</li>
+                <li><span class="font-semibold">Students</span> register for events and monitor tickets.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

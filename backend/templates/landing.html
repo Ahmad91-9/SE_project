@@ -1,0 +1,85 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Ventixe · University Event Management{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-br from-pastel-purple/10 via-white to-pastel-blue/5">
+    <header class="w-full">
+        <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-10">
+            <div class="flex-1">
+                <p class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-pastel-purple bg-white px-3 py-1 rounded-full shadow-sm">Ventixe · University of Sargodha</p>
+                <h1 class="text-4xl md:text-5xl font-black text-gray-900 mt-4 leading-tight">
+                    A single pane of glass for every <span class="text-pastel-purple">campus event</span>.
+                </h1>
+                <p class="text-lg text-gray-600 mt-4 max-w-xl">Streamline registrations, venue logistics, vendor billing, and student communications across faculties. Purpose-built for university event offices.</p>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{{ url_for('auth.login') }}" class="btn-primary">Launch Admin Portal</a>
+                    <a href="{{ url_for('auth.student_register') }}" class="btn-secondary">Student Signup</a>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12">
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">45+</p>
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Annual Events</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">12.5K</p>
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Student Registrations</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">4</p>
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Stakeholder Workspaces</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">98%</p>
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 bg-white rounded-3xl shadow-2xl border border-gray-100 p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-3">Upcoming spotlight</p>
+                <div class="space-y-4">
+                    {% for event in featured_events %}
+                    <div class="p-4 rounded-2xl border border-gray-100 hover:border-pastel-purple/50 transition">
+                        <p class="text-lg font-semibold text-gray-900">{{ event.title }}</p>
+                        <p class="text-sm text-gray-500">{{ event.location }} · {{ event.start_date.strftime('%b %d, %Y') }}</p>
+                        <span class="inline-flex mt-2 px-3 py-1 rounded-full text-xs font-semibold bg-pastel-purple/10 text-pastel-purple capitalize">{{ event.status }}</span>
+                    </div>
+                    {% else %}
+                    <p class="text-gray-500 text-sm">No events yet. Seed the database to see live data.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-6">
+    <article class="card">
+        <h3>Role-aware Dashboards</h3>
+        <p>Dedicated workspaces for administrators, faculty organizers, event managers, and student ambassadors.</p>
+    </article>
+    <article class="card">
+        <h3>Integrated Registration</h3>
+        <p>Students register once, pick events, receive vouchers, and track approvals in real time.</p>
+    </article>
+    <article class="card">
+        <h3>Finance Ready</h3>
+        <p>Invoice sponsors, monitor revenue, and visualize P&L performance across seasons.</p>
+    </article>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-16">
+    <div class="rounded-3xl bg-pastel-purple text-white p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-white/70">UOS Digital Office</p>
+            <h2 class="text-3xl font-bold mt-3">Ready to orchestrate remarkable campus experiences?</h2>
+            <p class="text-white/90 mt-2 max-w-xl">Launch the secure event control room for faculty & staff or invite students to self-serve registrations.</p>
+        </div>
+        <div class="flex gap-4">
+            <a href="{{ url_for('auth.login') }}" class="btn-white">Admin Login</a>
+            <a href="{{ url_for('auth.student_register') }}" class="btn-outline-white">Student Access</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

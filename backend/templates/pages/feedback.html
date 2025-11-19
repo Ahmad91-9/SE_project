@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+
+{% block page_title %}Feedback Analytics{% endblock %}
+
+{% block content %}
+<section class="p-6 lg:p-10 space-y-8">
+    <header>
+        <p class="text-sm text-gray-500">Experience Insights</p>
+        <h1 class="text-3xl font-bold text-gray-900">Student & Stakeholder Feedback</h1>
+    </header>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+        {% for item in feedback %}
+        <article class="card border-l-4 border-green-400">
+            <header class="flex items-center justify-between">
+                <div>
+                    <p class="font-semibold text-gray-900">{{ item.author }}</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide">{{ item.role }}</p>
+                </div>
+                <span class="text-green-600 font-bold text-lg">{{ item.score }}/5</span>
+            </header>
+            <p class="text-gray-600 mt-4">{{ item.comment }}</p>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="card bg-green-50 border-green-100">
+        <p class="font-semibold text-green-700">Average Satisfaction Score: 4.6 / 5.0</p>
+    </div>
+</section>
+{% endblock %}
+

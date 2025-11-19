@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-background-soft">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Ventixe · UOS Event Management{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-purple': '#8b5cf6',
+                        'pastel-pink': '#f472b6',
+                        'pastel-blue': '#60a5fa',
+                        'background-soft': '#fdfdff'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-background-soft text-gray-900">
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        {% if current_user %}
+        <aside class="bg-white lg:w-64 border-r border-gray-100 p-6 flex flex-col gap-6 sticky top-0 h-full z-20">
+            <div>
+                <a href="{{ url_for('pages.dashboard') }}" class="flex items-center gap-3 text-xl font-black text-pastel-purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10 text-pastel-pink" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 3l9 5-9 5-9-5 9-5z"/>
+                        <path d="M3 8v6l9 5 9-5V8"/>
+                    </svg>
+                    Ventixe <span class="text-xs text-gray-400 uppercase tracking-wide">UOS</span>
+                </a>
+                <p class="text-sm text-gray-500 mt-1">{{ current_user.role.value | title }} Workspace</p>
+            </div>
+            <nav class="flex-1 space-y-1 text-sm">
+                <a href="{{ url_for('pages.dashboard') }}" class="nav-link {% if request.path == url_for('pages.dashboard') %}active{% endif %}">Dashboard</a>
+                {% if current_user.role.value in ['admin','manager','staff','student'] %}
+                <a href="{{ url_for('pages.student_registrations') }}" class="nav-link {% if '/registrations' in request.path %}active{% endif %}">Student Registration</a>
+                {% endif %}
+                {% if current_user.role.value in ['admin','manager','organizer'] %}
+                <a href="{{ url_for('pages.bookings') }}" class="nav-link">Bookings</a>
+                {% endif %}
+                {% if current_user.role.value in ['admin','organizer','staff'] %}
+                <a href="{{ url_for('pages.evoucher') }}" class="nav-link">E-Voucher</a>
+                {% endif %}
+                {% if current_user.role.value in ['admin','manager'] %}
+                <a href="{{ url_for('pages.invoices') }}" class="nav-link">Invoices</a>
+                {% endif %}
+                {% if current_user.role.value in ['admin','manager','staff'] %}
+                <a href="{{ url_for('pages.inbox') }}" class="nav-link">Inbox</a>
+                {% endif %}
+                <a href="{{ url_for('pages.calendar') }}" class="nav-link">Calendar</a>
+                <a href="{{ url_for('pages.events_grid') }}" class="nav-link">Events (Grid)</a>
+                <a href="{{ url_for('pages.events_list') }}" class="nav-link">Events (List)</a>
+                {% if current_user.role.value in ['admin','manager'] %}
+                <a href="{{ url_for('pages.financials') }}" class="nav-link">Financials</a>
+                {% endif %}
+                <a href="{{ url_for('pages.gallery') }}" class="nav-link">Gallery</a>
+                {% if current_user.role.value in ['admin','manager','staff'] %}
+                <a href="{{ url_for('pages.feedback') }}" class="nav-link">Feedback</a>
+                {% endif %}
+            </nav>
+            <div class="rounded-2xl bg-pastel-purple/5 border border-pastel-purple/20 p-4">
+                <p class="text-xs uppercase text-pastel-purple tracking-wide mb-2">Signed in as</p>
+                <p class="font-semibold text-gray-800">{{ current_user.full_name }}</p>
+                <p class="text-xs text-gray-500">{{ current_user.email }}</p>
+                <a href="{{ url_for('auth.logout') }}" class="inline-flex text-sm mt-4 text-pastel-purple font-semibold hover:text-pastel-pink transition">Sign out</a>
+            </div>
+        </aside>
+        {% endif %}
+
+        <main class="flex-1">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="max-w-3xl mx-auto mt-6 px-6">
+                        {% for category, message in messages %}
+                            <div class="mb-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white"
+                                 style="background: {% if category == 'success' %}#22c55e{% elif category == 'danger' %}#ef4444{% elif category == 'warning' %}#f97316{% else %}#6366f1{% endif %};"
+                                 data-toast>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
